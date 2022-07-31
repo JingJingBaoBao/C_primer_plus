@@ -1,0 +1,38 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+#include "12_11.h"
+
+int main(void)
+{
+    int dice, roll;
+    int sides;
+    int status;
+
+    srand((unsigned int) time(0));
+    printf("Enter the number of sides per sides, 0 ot stop.\n");
+    while (scanf("%d", &sides) == 1 && sides > 0) {
+        printf("How many dices?\n");
+        if ((status = scanf("%d", &dice)) != 1) {
+            if (status != EOF) {
+                break;
+            }
+            else {
+                printf("You shoule have enter a interger.");
+                printf(" Let's begin again\n");
+                while (getchar() != '\n') {
+                    continue;
+                }
+                printf("How many sides? 0 to stop\n");
+                continue;
+            }
+        }
+        roll = roll_n_dice(dice, sides);
+        printf("You have rolled a %d using %d %d-sided dice.\n", roll, dice, sides);
+        printf("How many dices? 0 to quit\n");
+    }
+    printf("The roolem() function was called %d times\n", roll_count);
+    printf("Done\n");
+
+    return 0;
+}
